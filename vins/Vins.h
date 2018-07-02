@@ -28,6 +28,7 @@ namespace vins_util{
     {
         "r_jmpn",
         "r_jmpz",
+        "r_jmpp",
         "rl_add",
         "rl_load",
         "rp_load",
@@ -35,7 +36,10 @@ namespace vins_util{
         "rr_cmp",
         "rr_div",
         "rr_mul",
-        "rr_sub"
+        "rr_sub",
+        "rr_store",
+        "rr_load",
+        "rr_band",
     };
 }
 

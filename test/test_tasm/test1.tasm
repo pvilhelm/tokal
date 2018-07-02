@@ -1,0 +1,12 @@
+# Loop 255 times and add 1
+
+rl_load 0 0
+rl_load 2 loop
+
+:loop
+    rl_add 0 1
+    rl_load 1 255
+    rr_cmp 0 1
+    r_jmpp 2
+    
+    

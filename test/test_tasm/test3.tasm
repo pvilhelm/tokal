@@ -1,0 +1,20 @@
+# Test some more
+
+#Do a wanna-be funktion
+
+#uint64_t magic(uint64_t a, uint64_t b){ return a + b * 2;}
+
+#assume arguments are on the stack #a = 0, #b = 8
+
+rl_load 0 0
+rr_add 0 SP # move sp to r0
+
+rl_add 0 -8
+rr_load 1 0 # load b to r1
+
+rl_add 0 -8
+rr_load 2 0 # load a to r2
+
+rl_load 0 2  # load 2 to r0
+rr_mul 0 1   # multiply r0(2) and r1(b) into r0
+rr_add 0 2   # add sum of r0(b*2) and r1(a)

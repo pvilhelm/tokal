@@ -19,50 +19,60 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\assembly.cpp" />
     <ClCompile Include="..\Cpu.cpp" />
     <ClCompile Include="..\vins\Vins.cpp" />
+    <ClCompile Include="..\vins\vins_rr_band.cpp" />
     <ClCompile Include="..\vins\vins_rr_div.cpp" />
+    <ClCompile Include="..\vins\vins_rr_load.cpp" />
     <ClCompile Include="..\vins\vins_rr_mul.cpp" />
+    <ClCompile Include="..\vins\vins_rr_store.cpp" />
     <ClCompile Include="..\vins\Vins_rr_sub.cpp" />
     <ClCompile Include="..\vins\vins_r_jmpn.cpp" />
+    <ClCompile Include="..\vins\vins_r_jmpp.cpp" />
     <ClCompile Include="..\vins\vins_r_jmpz.cpp" />
     <ClCompile Include="..\vins\vins_rl_add.cpp" />
     <ClCompile Include="..\vins\Vins_rl_load.cpp" />
     <ClCompile Include="..\vins\Vins_rp_load.cpp" />
     <ClCompile Include="..\vins\Vins_rr_add.cpp" />
     <ClCompile Include="..\vins\vins_rr_cmp.cpp" />
-    <ClCompile Include="assembler.cpp" />
-    <ClCompile Include="assembly.cpp" />
     <ClCompile Include="test_assembly.cpp" />
     <ClCompile Include="test_cpu.cpp" />
+    <ClCompile Include="test_jobb.cpp" />
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="test_rl_add.cpp" />
     <ClCompile Include="test_rl_load.cpp" />
     <ClCompile Include="test_rp_load.cpp" />
     <ClCompile Include="test_rr_add.cpp" />
+    <ClCompile Include="test_rr_band.cpp" />
     <ClCompile Include="test_rr_cmp.cpp" />
     <ClCompile Include="test_rr_div.cpp" />
+    <ClCompile Include="test_rr_load.cpp" />
+    <ClCompile Include="test_rr_store.cpp" />
     <ClCompile Include="test_rr_sub.cpp" />
     <ClCompile Include="test_r_jmpn.cpp" />
     <ClCompile Include="test_r_jmpz.cpp" />
     <ClCompile Include="test_vins.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\assembly.h" />
     <ClInclude Include="..\Cpu.h" />
     <ClInclude Include="..\vins\Vins.h" />
     <ClInclude Include="..\vins\vins_all.h" />
+    <ClInclude Include="..\vins\vins_rr_band.h" />
     <ClInclude Include="..\vins\vins_rr_div.h" />
+    <ClInclude Include="..\vins\vins_rr_load.h" />
     <ClInclude Include="..\vins\vins_rr_mul.h" />
+    <ClInclude Include="..\vins\vins_rr_store.h" />
     <ClInclude Include="..\vins\Vins_rr_sub.h" />
     <ClInclude Include="..\vins\vins_r_jmpn.h" />
+    <ClInclude Include="..\vins\vins_r_jmpp.h" />
     <ClInclude Include="..\vins\vins_r_jmpz.h" />
     <ClInclude Include="..\vins\vins_rl_add.h" />
     <ClInclude Include="..\vins\Vins_rl_load.h" />
     <ClInclude Include="..\vins\Vins_rp_load.h" />
     <ClInclude Include="..\vins\Vins_rr_add.h" />
     <ClInclude Include="..\vins\vins_rr_cmp.h" />
-    <ClInclude Include="assembler.h" />
-    <ClInclude Include="assembly.h" />
     <ClInclude Include="catch.hpp" />
     <ClInclude Include="test_rr_mul.cpp" />
   </ItemGroup>

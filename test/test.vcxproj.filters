@@ -78,12 +78,6 @@
     <ClCompile Include="test_rr_div.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="assembler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assembly.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test_vins.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -94,6 +88,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="test_assembly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vins\vins_rr_store.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_rr_store.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_jobb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\assembly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vins\vins_r_jmpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vins\vins_rr_load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_rr_load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vins\vins_rr_band.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_rr_band.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,17 +158,26 @@
     <ClInclude Include="test_rr_mul.cpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\vins\vins_rr_div.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="assembler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="assembly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\vins\Vins_rr_sub.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vins\vins_rr_store.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\assembly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vins\vins_rr_div.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vins\vins_r_jmpp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vins\vins_rr_load.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vins\vins_rr_band.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

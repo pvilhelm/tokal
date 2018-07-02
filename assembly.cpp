@@ -1,29 +1,74 @@
 #include "assembly.h"
 
+//#include <iostream>
+#include <fstream>
+#include <strstream>
+
 #include <set>
 #include <stdexcept> 
 #include <limits>
 #include <memory>
 
+#include <cctype>
+
 using namespace std;
 
 assembly::assembly()
-{}
+{
+    //first data always "empty" so that null pointers can fail
+    /*for(int i = 0; i < 8; i++)
+        v_cdata.push_back(0);*/
+}
 
 
-assembly::~assembly()
-{}
+static bool is_label(string s)
+{
+
+}
 
 void assembly::parse_string(string s)
 {
     string s_program = assembly_util::remove_comments(s);
     vector<string> v_tokens = assembly_util::tokenize_string(s_program);
+    {
+        //resolve all primitives with symbols
+        for(auto &it = v_tokens.cbegin(); it < v_tokens.cend(); it++) {
+            //check if primitive
+            if(assembly_util::set_primitives.find(*it) != assembly_util::set_primitives.cend()) {
+                ps_handle_primitive(it, v_tokens.cend());
+            } 
+        }
+        // Pad with zeroes so last data object always can be accessed as a 64bit value
+        uint64_t size = v_cdata.size();
+        uint64_t diff = size % 8 ? 8 - size % 8 : 0;
+        for(uint64_t i = 0; i < diff; i++)
+            v_cdata.push_back(0);
 
+        // translate offset to address to address
+        if(v_cdata.size() > 0) {
+            uint64_t base_ptr = (uint64_t)&this->v_cdata[0];
+            for(auto &pair : this->map_symbol_to_offset_adress) {
+                map_symbol_to_address.emplace(pair.first, pair.second + base_ptr);
+            }
+        }
+    }
+    //resolve all labels
+    {
+        int64_t instruction_address = -1;
+        for(auto &it = v_tokens.cbegin(); it < v_tokens.cend(); it++) {
+            // Check if label
+            if(vins_util::set_of_instruction_names.find(*it) != vins_util::set_of_instruction_names.cend()) {
+                instruction_address++;
+            } else if((*it).front() == ':') {
+                ps_handle_label(it, v_tokens.cend(), instruction_address);
+            }
+        }
+    }
+
+    // resolve all instructions
     for(auto &it = v_tokens.cbegin(); it < v_tokens.cend(); it++) {
-        //check if primitive
-        if(set_primitives.find(*it) != set_primitives.cend()) {
-            ps_handle_primitive(it, v_tokens.cend());
-        } else if(vins_util::set_of_instruction_names.find(*it) != vins_util::set_of_instruction_names.cend()) {
+        // Check if virtual instruction
+        if(vins_util::set_of_instruction_names.find(*it) != vins_util::set_of_instruction_names.cend()) {
             ps_handle_vins(it, v_tokens.cend());
         }
     }
@@ -38,19 +83,80 @@ void assembly::ps_handle_vins(vector<string>::const_iterator &it, vector<string>
     if(it + n_args == end)
         throw runtime_error("Parse error. Too few tokens for virtual instruction");
 
-    // At this point of the assembly all syntactic sugar should be nice uint64:s :D
-    for(int i = 0; i < n_args; i++) {
-        uint64_t value = stoull(*it++,0,0);
-        sptr_vin->set_arg(value);
+    // At this point of the assembly all syntactic sugar should be nice uint64:s or symbols :D
+    for(uint32_t i = 0; i < n_args; i++) {
+
+        if(isdigit((*it)[0])){
+            uint64_t value = stoull(*it++, 0, 0);
+            sptr_vin->set_arg(value);
+        } else if((*it).front() == '-' && isdigit((*it)[1])){
+            uint64_t value = (uint64_t)stoll(*it++, 0, 0);
+            sptr_vin->set_arg(value);
+        } else if(cpu_util::map_regname_too_num.find(*it) != cpu_util::map_regname_too_num.cend()){
+            auto pair = cpu_util::map_regname_too_num.find(*it++);
+            sptr_vin->set_arg(pair->second);
+        } else {
+            auto itmap = this->map_symbol_to_address.find(*it++);
+            if(itmap == map_symbol_to_address.cend())
+                throw runtime_error("Symbol not in symbol map");
+            sptr_vin->set_arg(itmap->second);
+        }
     }
 
     //this should be a new line token
-    string nl = *it++;
+    string nl = *it;
     if(nl != "\n")
         throw runtime_error("No new line at end of virtual instruction line");
 
     this->v_instructions.push_back(sptr_vin);
 
+}
+
+void assembly::ps_handle_label(std::vector<std::string>::const_iterator it, std::vector<std::string>::const_iterator end, int64_t instruction_address)
+{
+    using namespace std;
+
+    string name = (*it).substr(1);
+    if(name.length() == 0)
+        throw runtime_error("Label name missing");
+
+    // Search for next instruction
+    for(; it < end; it++) {
+        if(vins_util::set_of_instruction_names.find(*it) != vins_util::set_of_instruction_names.cend()) {
+            auto pair = map_symbol_to_address.emplace(name, instruction_address + 1);
+            if(!pair.second)
+                throw runtime_error("Symbol already defined!: " + name);
+            break;
+        } 
+    }
+}
+
+assembly assembly::assembly_from_string(std::string s)
+{
+    assembly ass;
+    ass.parse_string(s);
+
+    uint64_t data_ptr = 0;
+
+    return ass;
+}
+
+assembly assembly::assembly_from_file(std::string s)
+{
+    
+
+    std::ifstream ifs(s);
+
+    if(!ifs.is_open())
+        throw runtime_error("Could not open file: " + s);
+
+    std::string ss(std::istreambuf_iterator<char>{ifs}, {});
+
+    assembly ass = assembly_from_string(ss);
+
+    uint64_t data_ptr = 0;
+
+    return ass;
 }
 
 void assembly::ps_handle_primitive(vector<string>::const_iterator &it, vector<string>::const_iterator end)
@@ -63,7 +169,8 @@ void assembly::ps_handle_primitive(vector<string>::const_iterator &it, vector<st
     string value = *it++;
 
     //this need to be a new line
-    string nl = *it++;
+    string nl = *it;
+
     if(nl != "\n")
         throw runtime_error("Parse error. No new line after primitive");
 
@@ -97,7 +204,7 @@ void assembly::ps_handle_primitive(vector<string>::const_iterator &it, vector<st
         throw runtime_error("bugg: " + s_type);
     }
 
-    auto pair = map_symbol_to_adress.emplace(name, adress);
+    auto pair = map_symbol_to_offset_adress.emplace(name, adress);
     if(!pair.second)
         throw runtime_error("Symbol already defined!");
 
@@ -287,7 +394,7 @@ vector<string> assembly_util::tokenize_string(string s)
             } else if(is_escaped) {
                 tmp += c;
             } else {
-                ans.push_back(tmp);
+                if(tmp.size() != 0) ans.push_back(tmp);
                 tmp = "";
                 tmp += c;
                 ans.push_back(tmp);

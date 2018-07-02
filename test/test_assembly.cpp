@@ -106,9 +106,9 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 8);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"u16","test","0XFFAA","\n"};
@@ -117,10 +117,10 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0xAA);
             REQUIRE(ass.v_cdata[1] == 0xFF);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"u32","test","0XFFAABBCC","\n"};
@@ -129,12 +129,12 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0xcc);
             REQUIRE(ass.v_cdata[1] == 0xBB); 
             REQUIRE(ass.v_cdata[2] == 0xAA);
             REQUIRE(ass.v_cdata[3] == 0xFF);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"u64","test","0X44332211FFAABBCC","\n"};
@@ -143,7 +143,7 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0xcc);
             REQUIRE(ass.v_cdata[1] == 0xBB);
             REQUIRE(ass.v_cdata[2] == 0xAA);
@@ -152,7 +152,7 @@ TEST_CASE("Test assembly")
             REQUIRE(ass.v_cdata[5] == 0x22);
             REQUIRE(ass.v_cdata[6] == 0x33);
             REQUIRE(ass.v_cdata[7] == 0x44);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"s8","test","8","\n"};
@@ -161,9 +161,9 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 8);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"s16","test","-86","\n"};
@@ -172,10 +172,10 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0xAA);
             REQUIRE(ass.v_cdata[1] == 0xFF);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"s32","test","-1122902","\n"};
@@ -184,12 +184,12 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0xAA);
             REQUIRE(ass.v_cdata[1] == 0xDD);
             REQUIRE(ass.v_cdata[2] == 0xEE);
             REQUIRE(ass.v_cdata[3] == 0xFF);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"s64","test","-4822678189205112","\n"};
@@ -198,7 +198,7 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0x88);
             REQUIRE(ass.v_cdata[1] == 0x99);
             REQUIRE(ass.v_cdata[2] == 0xAA);
@@ -207,7 +207,7 @@ TEST_CASE("Test assembly")
             REQUIRE(ass.v_cdata[5] == 0xDD);
             REQUIRE(ass.v_cdata[6] == 0xEE);
             REQUIRE(ass.v_cdata[7] == 0xFF);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"double","test","0.73","\n"};
@@ -216,7 +216,7 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0x5c);
             REQUIRE(ass.v_cdata[1] == 0x8f);
             REQUIRE(ass.v_cdata[2] == 0xc2);
@@ -225,7 +225,7 @@ TEST_CASE("Test assembly")
             REQUIRE(ass.v_cdata[5] == 0x5c);
             REQUIRE(ass.v_cdata[6] == 0xe7);
             REQUIRE(ass.v_cdata[7] == 0x3f);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"single","test","0.73","\n"};
@@ -234,12 +234,12 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0x48);
             REQUIRE(ass.v_cdata[1] == 0xe1);
             REQUIRE(ass.v_cdata[2] == 0x3a);
             REQUIRE(ass.v_cdata[3] == 0x3f);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"single","test","inf","\n"};
@@ -248,12 +248,12 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == 0x00);
             REQUIRE(ass.v_cdata[1] == 0x00);
             REQUIRE(ass.v_cdata[2] == 0x80);
             REQUIRE(ass.v_cdata[3] == 0x7f);
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
         {
             vector<string> v{"double","test","inf","\n"};
@@ -263,7 +263,7 @@ TEST_CASE("Test assembly")
 
             ass.ps_handle_primitive(v.cbegin(), v.cend());
 
-            REQUIRE(ass.map_symbol_to_adress.find("test") != ass.map_symbol_to_adress.cend());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") != ass.map_symbol_to_offset_adress.cend());
             REQUIRE(ass.v_cdata[0] == ((uint8_t)iinf));
             REQUIRE(ass.v_cdata[1] == ((uint8_t)(iinf >> 8)));
             REQUIRE(ass.v_cdata[2] == ((uint8_t)(iinf >> 16)));
@@ -272,7 +272,7 @@ TEST_CASE("Test assembly")
             REQUIRE(ass.v_cdata[5] == ((uint8_t)(iinf >> 40)));
             REQUIRE(ass.v_cdata[6] == ((uint8_t)(iinf >> 48)));
             REQUIRE(ass.v_cdata[7] == ((uint8_t)(iinf >> 56)));
-            REQUIRE(ass.map_symbol_to_adress.find("test") == ass.map_symbol_to_adress.cbegin());
+            REQUIRE(ass.map_symbol_to_offset_adress.find("test") == ass.map_symbol_to_offset_adress.cbegin());
         }
     }
 
@@ -386,7 +386,7 @@ TEST_CASE("Test assembly")
             assembly ass;
             auto &it = v.cbegin();
             ass.ps_handle_primitive(it, v.cend());
-            ass.ps_handle_primitive(it, v.cend());
+            ass.ps_handle_primitive(++it, v.cend());
 
             REQUIRE(ass.v_cdata[0] == 255);
             REQUIRE(ass.v_cdata[2] == 0x11);
@@ -398,7 +398,7 @@ TEST_CASE("Test assembly")
             assembly ass;
             auto &it = v.cbegin();
             ass.ps_handle_primitive(it, v.cend());
-            ass.ps_handle_primitive(it, v.cend());
+            ass.ps_handle_primitive(++it, v.cend());
 
             REQUIRE(ass.v_cdata[0] == 255);
             REQUIRE(ass.v_cdata[4] == 0x11);
@@ -412,7 +412,7 @@ TEST_CASE("Test assembly")
             assembly ass;
             auto &it = v.cbegin();
             ass.ps_handle_primitive(it, v.cend());
-            ass.ps_handle_primitive(it, v.cend());
+            ass.ps_handle_primitive(++it, v.cend());
 
             REQUIRE(ass.v_cdata[0] == 127);
             REQUIRE(ass.v_cdata[4] == 0x11);
@@ -426,7 +426,7 @@ TEST_CASE("Test assembly")
             assembly ass;
             auto &it = v.cbegin();
             ass.ps_handle_primitive(it, v.cend());
-            ass.ps_handle_primitive(it, v.cend());
+            ass.ps_handle_primitive(++it, v.cend());
 
             REQUIRE(ass.v_cdata[0] == 255);
             REQUIRE(ass.v_cdata[8] == 0x11);
@@ -444,7 +444,7 @@ TEST_CASE("Test assembly")
             assembly ass;
             auto &it = v.cbegin();
             ass.ps_handle_primitive(it, v.cend());
-            ass.ps_handle_primitive(it, v.cend());
+            ass.ps_handle_primitive(++it, v.cend());
 
             REQUIRE(ass.v_cdata[0] == 255);
             REQUIRE(ass.v_cdata[8] == 0x11);
@@ -455,6 +455,14 @@ TEST_CASE("Test assembly")
             REQUIRE(ass.v_cdata[13] == 0x66);
             REQUIRE(ass.v_cdata[14] == 0x77);
             REQUIRE(ass.v_cdata[15] == 0x88);
+        }
+        {
+            vector<string> v{"s8","test","127","\n", "s32", "test","1144201745","\n"};
+
+            assembly ass;
+            auto &it = v.cbegin();
+            ass.ps_handle_primitive(it, v.cend());
+            REQUIRE_THROWS(ass.ps_handle_primitive(it, v.cend()));       
         }
     }
 
@@ -472,6 +480,104 @@ TEST_CASE("Test assembly")
             REQUIRE(typeid(*ass.v_instructions[0]).name() == typeid(ans_type).name());
             ass.v_instructions[0]->execute(&cpu);
             REQUIRE(cpu.r[0] == 2);
+        }
+    }
+
+    SECTION("Test parse string with primitives")
+    {
+        {
+            string program = "u8 u 3\nu8 i 3\nrl_add 0 i\n";
+            Vins_rl_add ans_type;
+            assembly ass;
+
+            ass.parse_string(program);
+            REQUIRE(typeid(*ass.v_instructions[0]).name() == typeid(ans_type).name());
+            REQUIRE(ass.map_symbol_to_address.find("i")->first == "i");
+            REQUIRE(ass.map_symbol_to_address.find("i")->second == 1 + (uint64_t)&ass.v_cdata[0]);
+
+        }
+    }
+
+    SECTION("Test parse string with primitives and label")
+    {
+        {
+            string program = "u8 u 3\nu8 i 3\nrl_add 0 i\n:label\nrp_load 0 label\n";
+            Vins_rl_add ans_type;
+            assembly ass;
+
+            ass.parse_string(program);
+            REQUIRE(typeid(*ass.v_instructions[0]).name() == typeid(ans_type).name());
+            REQUIRE(ass.map_symbol_to_address.find("i")->first == "i");
+            REQUIRE(ass.map_symbol_to_address.find("i")->second == (uint64_t)&ass.v_cdata[0] + 1);
+            REQUIRE(ass.map_symbol_to_address.find("label")->first == "label");
+            REQUIRE(ass.map_symbol_to_address.find("label")->second == 1);
+        }
+    }
+
+    SECTION("Test parse string with primitives and label")
+    {
+        {
+            string file_path = "C:/repos/tokal/test/test_tasm/test0.tasm";
+
+            assembly ass = assembly::assembly_from_file(file_path);
+
+            REQUIRE(ass.v_instructions.size() == 3);
+            REQUIRE(ass.v_cdata.size() == 8);
+
+            Cpu cpu;
+
+            for(auto ins : ass.v_instructions) {
+                ins->execute(&cpu);
+            }
+
+            REQUIRE(cpu.r[0] == 6);
+        }
+        {
+            string file_path = "C:/repos/tokal/test/test_tasm/test1.tasm";
+
+            assembly ass = assembly::assembly_from_file(file_path);
+            
+            //REQUIRE(ass.v_instructions.size() == 5);
+            //REQUIRE(ass.v_cdata.size() == 0);
+
+            Cpu cpu;
+
+            cpu.setup_assembly(ass);
+            cpu.run_program();
+
+
+            REQUIRE(cpu.r[0] == 255);
+        }
+        {
+            string file_path = "C:/repos/tokal/test/test_tasm/test2.tasm";
+
+            assembly ass = assembly::assembly_from_file(file_path);
+
+            Cpu cpu;
+
+            cpu.setup_assembly(ass);
+            cpu.run_program();
+
+
+            REQUIRE(cpu.r[0] == 12);
+            REQUIRE(cpu.r[1] == 20);
+        }
+        {
+            string file_path = "C:/repos/tokal/test/test_tasm/test3.tasm";
+
+            assembly ass = assembly::assembly_from_file(file_path);
+
+            Cpu cpu;
+
+            cpu.setup_assembly(ass);
+
+            cpu.v_stack[0] = 2;
+            cpu.v_stack[8] = 3;
+            cpu.SP = (uint64_t)&cpu.v_stack[0] + 16;
+            cpu.run_program();
+
+
+            REQUIRE(cpu.r[0] == 8);
         }
     }
 }

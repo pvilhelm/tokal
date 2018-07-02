@@ -5,6 +5,7 @@
 
 #include "vins\vins_r_jmpz.h"
 #include "vins\vins_r_jmpn.h"
+#include "vins\vins_r_jmpp.h"
 #include "vins\vins_rl_add.h"
 #include "vins\Vins_rl_load.h"
 #include "vins\vins_rp_add.h"
@@ -14,3 +15,6 @@
 #include "vins\vins_rr_mul.h"
 #include "vins\vins_rr_div.h"
 #include "vins\vins_rr_sub.h"
+#include "vins\vins_rr_store.h"
+#include "vins\vins_rr_load.h"
+#include "vins\vins_rr_band.h"

@@ -12,6 +12,8 @@ std::unique_ptr<Vins> vins_util::vin_from_name(const std::string name)
 {
     if(name == "r_jmpn") {
         return std::make_unique<Vins_r_jmpn>();
+    } else if(name == "r_jmpp") {
+        return std::make_unique<Vins_r_jmpp>();
     } else if(name == "r_jmpz") {
         return std::make_unique<Vins_r_jmpz>();
     } else if(name == "rl_add") {
@@ -30,6 +32,10 @@ std::unique_ptr<Vins> vins_util::vin_from_name(const std::string name)
         return std::make_unique<Vins_rr_mul>();
     } else if(name == "rr_sub") {
         return std::make_unique<Vins_rr_mul>();
+    } else if(name == "rr_load") {
+        return std::make_unique<Vins_rr_load>();
+    } else if(name == "rr_band") {
+        return std::make_unique<Vins_rr_band>();
     }
 
     throw std::runtime_error("Not a valid instruction");

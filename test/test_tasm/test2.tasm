@@ -1,0 +1,13 @@
+# Test some more
+
+#mutliply data
+
+u64 a 3
+u64 b 4
+u64 c 5
+
+rp_load 0 a
+rp_load 1 b
+rp_load 2 c
+rr_mul 0 1
+rr_mul 1 2
